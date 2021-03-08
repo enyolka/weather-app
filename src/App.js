@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+
+import Form from "./components/Form/Form";
+import Content from "./components/Content/Content";
+import request from "./helpers/request";
 
 function App() {
+  const [city, setCity] = useState("");
+  const [data, setData] = useState(null);
+
+  const handleInputChange = (e) => setCity(e.target.value);
+
+  const fetchData = async (e) => {
+    e.preventDefault();
+    const { data, status } = await request.get(
+      `weather?q=${city}&appid=592c75d822336afdae80f54fdbbb4bcf`
+    );
+    if (status === 200) {
+      setData(data);
+    } else {
+      console.log(status);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header>Aplikacja pogodowa</header>
+      <Form
+        city={city}
+        handleInputChange={handleInputChange}
+        fetchData={fetchData}
+      />
+      <Content data={data} />
     </div>
   );
 }
