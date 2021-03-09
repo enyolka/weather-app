@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import Form from "./components/Form/Form";
-import Content from "./components/Content/Content";
+import Form from "./components/Form";
+import Content from "./components/Content";
 import request from "./helpers/request";
 
 function App() {
@@ -22,9 +22,21 @@ function App() {
     }
   };
 
+  const weatherMain = data ? data.weather[0].main : "";
+  const icon = data ? (
+    <img
+      className="header__icon"
+      src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`}
+      alt={data.weather[0].main}
+    />
+  ) : null;
+
   return (
-    <div className="App">
-      <header>Aplikacja pogodowa</header>
+    <div className="wrapper">
+      <header className={"header " + weatherMain}>
+        {icon}
+        <h1 className="header__title">Aplikacja pogodowa</h1>
+      </header>
       <Form
         city={city}
         handleInputChange={handleInputChange}
