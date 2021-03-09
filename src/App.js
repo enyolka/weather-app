@@ -22,7 +22,11 @@ function App() {
     }
   };
 
-  const weatherMain = data ? data.weather[0].main : "";
+  const weatherMain = data
+    ? 700 < data.weather[0].id && data.weather[0].id < 800
+      ? "header__fog"
+      : "header__" + data.weather[0].main.toLowerCase()
+    : "";
   const icon = data ? (
     <img
       className="header__icon"
@@ -34,8 +38,8 @@ function App() {
   return (
     <div className="wrapper">
       <header className={"header " + weatherMain}>
-        {icon}
         <h1 className="header__title">Aplikacja pogodowa</h1>
+        {icon}
       </header>
       <Form
         city={city}

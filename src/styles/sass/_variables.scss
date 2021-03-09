@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans&family=Roboto:wght@100&display=swap");
 
-$main-color: rgb(235, 157, 106);
-$special-font: "pt sans", "roboto", "arial, sans-serif";
-$default-font: arial, sans-serif;
+$main-color: rgb(82, 132, 165);
+$text-color: $main-color - 100;
+$main-font: "pt sans", "roboto", "arial, sans-serif";
 
 @mixin hover-btn() {
   border-color: rgb(255, 201, 52);
@@ -10,4 +10,13 @@ $default-font: arial, sans-serif;
   color: white;
   text-shadow: 0 1px 2px rgb(0, 0, 0);
   cursor: pointer;
+}
+
+@mixin text-title {
+  color: white;
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: -1px -1px 1px $gray, 1px -1px 0 $gray, -1px 1px 0 $gray,
+    1px 1px 0 $gray;
 }

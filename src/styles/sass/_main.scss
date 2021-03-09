@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans&family=Roboto:wght@100&display=swap");
 
+$gray: rgb(59, 59, 59);
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,16 +10,17 @@
 
 html {
   font-size: 12px;
-  background-color: $main-color + 50;
-  font-family: $default-font;
+  background-color: white;
+  font-family: $main-font;
 }
 
 .wrapper {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  align-content: center;
-  justify-items: center;
+  align-items: stretch;
+  align-self: center;
+  justify-content: center;
 
   font-size: 2rem;
   max-width: 1000px;
@@ -25,4 +28,55 @@ html {
   background-color: white;
   margin: auto;
   box-shadow: 0 0 6px 0 #000;
+}
+
+.header {
+  width: 100%;
+  text-align: center;
+  min-height: 150px;
+  max-height: 200px;
+  padding: 10px;
+  margin-top: 0;
+
+  background-image: url("../../assets/mountain.jpg");
+  background-size: auto;
+  background-repeat: repeat;
+  background-position: center;
+
+  &__thunderstorm {
+    background-image: url("../../assets/thunderstorm.jpg");
+  }
+
+  &__drizzle {
+    background-image: url("../../assets/drizzle.jpg");
+  }
+
+  &__rain {
+    background-image: url("../../assets/rain.jpg");
+  }
+
+  &__snow {
+    background-image: url("../../assets/snow.jpg");
+  }
+
+  &__fog {
+    background-image: url("../../assets/fog.jpg");
+  }
+
+  &__clear {
+    background-image: url("../../assets/clear.jpeg");
+  }
+
+  &__clouds {
+    background-image: url("../../assets/cloud.jpg");
+  }
+
+  &__icon {
+    padding: 3px;
+  }
+
+  &__title {
+    margin: 20px;
+    @include text-title;
+  }
 }

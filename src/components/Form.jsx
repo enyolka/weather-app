@@ -3,7 +3,6 @@ import React from "react";
 const Form = ({ city, handleInputChange, fetchData }) => {
   return (
     <section className="form">
-      <h2 className="form__title">Wyszukiwarka</h2>
       <form className="form__box" onSubmit={fetchData}>
         <input
           className="form__input"
@@ -12,7 +11,7 @@ const Form = ({ city, handleInputChange, fetchData }) => {
           placeholder="Enter city..."
           onChange={handleInputChange}
         />
-        <button className="form__btn btn" type="submit">
+        <button className="form__btn" type="submit">
           Search
         </button>
       </form>

@@ -10,11 +10,13 @@ const Content = ({ data }) => {
     <section className="content">
       {data !== null ? (
         <div>
-          <span className="content__place">
-            {`${data.name} (${data.sys.country})`}{" "}
-          </span>
-          <span className="content__sr-ss">
+          <h3 className="content__city">
+            {`${data.name} (${data.sys.country})`}
+          </h3>
+          <span className="content__time content__time--sr">
             <FiSun /> {new Date(data.sys.sunrise * 1000).toLocaleTimeString()}
+          </span>
+          <span className="content__time content__time--ss">
             <RiMoonClearLine />
             {new Date(data.sys.sunset * 1000).toLocaleTimeString()}
           </span>
