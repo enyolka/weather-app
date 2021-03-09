@@ -13,7 +13,7 @@ function App() {
   const fetchData = async (e) => {
     e.preventDefault();
     const { data, status } = await request.get(
-      `weather?q=${city}&appid=592c75d822336afdae80f54fdbbb4bcf`
+      `weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`
     );
     if (status === 200) {
       setData(data);
