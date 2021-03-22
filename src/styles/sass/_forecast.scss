@@ -1,0 +1,14 @@
+.forecast {
+  list-style: none;
+  display: flex;
+  flex-grow: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  &__item {
+    border: 2px solid rgba(255, 255, 255, 0.589);
+    padding: 4px;
+    margin: 10px;
+  }
+}
