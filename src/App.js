@@ -6,38 +6,48 @@ import request from "./helpers/request";
 
 function App() {
   const [city, setCity] = useState("");
-  const [data, setData] = useState(null);
+  const [currentData, setCurrentData] = useState(null);
+  const [forecastData, setForecastData] = useState(null);
 
   const handleInputChange = (e) => setCity(e.target.value);
 
   const fetchData = async (e) => {
     e.preventDefault();
-    const { data, status } = await request.get(
+    const current = await request.get(
       `weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`
     );
-    if (status === 200) {
-      setData(data);
+    if (current.status === 200) {
+      setCurrentData(current.data);
     } else {
-      console.log(status);
+      console.log(current.status);
+    }
+
+    const forecast = await request.get(
+      `forecast?q=${city}&appid=${process.env.REACT_APP_API_KEY}`
+    );
+    if (forecast.status === 200) {
+      setForecastData(forecast.data);
+    } else {
+      console.log(forecast.status);
     }
   };
 
-  const weatherMain = data
-    ? 700 < data.weather[0].id && data.weather[0].id < 800
-      ? "header__fog"
-      : "header__" + data.weather[0].main.toLowerCase()
+  const weatherMain = currentData
+    ? 700 < currentData.weather[0].id && currentData.weather[0].id < 800
+      ? "bg--fog"
+      : "bg--" + currentData.weather[0].main.toLowerCase()
     : "";
-  const icon = data ? (
+  const icon = currentData ? (
     <img
       className="header__icon"
-      src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`}
-      alt={data.weather[0].main}
+      src={`http://openweathermap.org/img/w/${currentData.weather[0].icon}.png`}
+      alt={currentData.weather[0].main}
     />
   ) : null;
 
   return (
-    <div className="wrapper">
-      <header className={"header " + weatherMain}>
+    <div className={"wrapper bg " + weatherMain}>
+      <header className={"header"}>
         <h1 className="header__title">Aplikacja pogodowa</h1>
         {icon}
       </header>
@@ -46,7 +56,7 @@ function App() {
         handleInputChange={handleInputChange}
         fetchData={fetchData}
       />
-      <Content data={data} />
+      <Content current={currentData} forecast={forecastData} />
     </div>
   );
 }

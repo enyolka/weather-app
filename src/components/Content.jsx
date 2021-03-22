@@ -1,37 +1,43 @@
 import React from "react";
-import { FiSun } from "react-icons/fi";
-import { RiMoonClearLine } from "react-icons/ri";
 
-const Content = ({ data }) => {
-  // const main = `Pogoda: ${data.weather.main} ${data.wather.description} `;
-  // const temperature = `Temperatura ${data.main.temp - 373}`;
+import ForecastItem from "./ForecastItem";
+import WeatherItem from "./WeatherItem";
+
+const Content = ({ current, forecast }) => {
+  const today = new Date();
+
+  const forecastList = forecast
+    ? forecast.list
+        .filter(
+          (item) =>
+            (new Date(Date.parse(item.dt_txt)).getDate() > today.getDate()) |
+              (new Date(Date.parse(item.dt_txt)).getDate() <= today.getDate() &&
+                new Date(Date.parse(item.dt_txt)).getMonth() >
+                  today.getMonth()) &&
+            item.dt_txt.split(" ")[1].split(":")[0] === "12"
+        )
+        .map((item) => <ForecastItem key={item.dt_txt} data={item} />)
+        .slice(0, 4)
+    : null;
 
   return (
     <section className="content">
-      {data !== null ? (
-        <div>
+      {console.log(current)}
+      {console.log(forecast)}
+      {current !== null ? (
+        <div className="content__div">
           <h3 className="content__city">
-            {`${data.name} (${data.sys.country})`}
+            {`${current.name} (${current.sys.country})`}
           </h3>
-          <span className="content__time content__time--sr">
-            <FiSun /> {new Date(data.sys.sunrise * 1000).toLocaleTimeString()}
-          </span>
-          <span className="content__time content__time--ss">
-            <RiMoonClearLine />
-            {new Date(data.sys.sunset * 1000).toLocaleTimeString()}
-          </span>
-          <ul className="content__items">
-            <li className="content__item">{data.weather[0].description}</li>
-            <li className="content__item">{`Temperature ${Number(
-              (data.main.temp - 273).toFixed(1)
-            )} \xB0C`}</li>
-            <li className="content__item">{`Pressure ${data.main.pressure} hPa`}</li>
-            <li className="content__item">{`Humidity ${data.main.humidity} %`}</li>
-            <li className="content__item">{`Wind ${data.wind.speed} meter/sec`}</li>
-            <li className="content__item">{`Cloudiness ${data.clouds.all}%`}</li>
-          </ul>
+          <WeatherItem current={current} />
         </div>
       ) : null}
+
+      <div className="content__div">
+        {forecast !== null ? (
+          <ul className="forecast">{forecastList}</ul>
+        ) : null}
+      </div>
     </section>
   );
 };
