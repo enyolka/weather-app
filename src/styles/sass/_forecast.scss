@@ -1,14 +1,32 @@
 .forecast {
   list-style: none;
   display: flex;
-  flex-grow: row;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 
+  font-size: 16px;
+
   &__item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
     border: 2px solid rgba(255, 255, 255, 0.589);
     padding: 4px;
     margin: 10px;
+  }
+
+  &__temperature {
+    font-size: 19px;
+  }
+
+  &__description {
+    text-transform: uppercase;
+    font-size: 11px;
+    padding: 2px;
   }
 }
