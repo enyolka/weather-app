@@ -39,7 +39,7 @@ function App() {
     : "";
   const icon = currentData ? (
     <img
-      className="header__icon"
+      className="icon"
       src={`http://openweathermap.org/img/w/${currentData.weather[0].icon}.png`}
       alt={currentData.weather[0].main}
     />
