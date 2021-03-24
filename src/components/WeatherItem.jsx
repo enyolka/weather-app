@@ -3,8 +3,12 @@ import { FiSun } from "react-icons/fi";
 import { RiMoonClearLine } from "react-icons/ri";
 
 const WeatherItem = ({ current }) => {
-  const sunrise = new Date(current.sys.sunrise * 1000).toLocaleTimeString();
-  const sunset = new Date(current.sys.sunset * 1000).toLocaleTimeString();
+  const sunrise = new Date(
+    (current.sys.sunrise + current.timezone) * 1000
+  ).toLocaleTimeString();
+  const sunset = new Date(
+    (current.sys.sunset + current.timezone) * 1000
+  ).toLocaleTimeString();
   const temperature = Number((current.main.temp - 273).toFixed(0));
 
   return (

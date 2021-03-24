@@ -6,6 +6,14 @@ import WeatherItem from "./WeatherItem";
 const Content = ({ current, forecast }) => {
   const today = new Date();
 
+  const icon = current ? (
+    <img
+      className="icon"
+      src={`http://openweathermap.org/img/w/${current.weather[0].icon}.png`}
+      alt={current.weather[0].main}
+    />
+  ) : null;
+
   const forecastList = forecast
     ? forecast.list
         .filter(
@@ -22,10 +30,10 @@ const Content = ({ current, forecast }) => {
 
   return (
     <section className="content">
-      {console.log(current)}
       {console.log(forecast)}
       {current !== null ? (
         <div className="content__div">
+          <div>{icon}</div>
           <h3 className="content__city">
             {`${current.name} (${current.sys.country})`}
           </h3>

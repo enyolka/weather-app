@@ -37,19 +37,11 @@ function App() {
       ? "bg--fog"
       : "bg--" + currentData.weather[0].main.toLowerCase()
     : "";
-  const icon = currentData ? (
-    <img
-      className="icon"
-      src={`http://openweathermap.org/img/w/${currentData.weather[0].icon}.png`}
-      alt={currentData.weather[0].main}
-    />
-  ) : null;
 
   return (
     <div className={"wrapper bg " + weatherMain}>
       <header className={"header"}>
-        <h1 className="header__title">Aplikacja pogodowa</h1>
-        {icon}
+        <h1 className="header__title">Weather app</h1>
       </header>
       <Form
         city={city}
